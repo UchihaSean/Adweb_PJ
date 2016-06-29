@@ -3,7 +3,6 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <mappers>
-        <mapper resource="dugu9sword/plagueserver/mapping/UserMapper.xml" />
-        <mapper resource="dugu9sword/plagueserver/mapping/StateMapper.xml" />
+        <mapper resource="adweb/mapping/PicMapper.xml" />
     </mappers>
 </configuration>

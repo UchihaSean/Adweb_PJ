@@ -14,9 +14,9 @@
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/plague?characterEncoding=utf-8" />
+        <property name="url" value="jdbc:mysql://localhost:3306/test?characterEncoding=utf-8" />
         <property name="username" value="root" />
-        <property name="password" value="" />
+        <property name="password" value="123456" />
     </bean>
 
     <!--
@@ -35,7 +35,7 @@
         basePackage:指定sql映射文件/接口所在的包（自动扫描）
     -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="dugu9sword.plagueserver.dao"></property>
+        <property name="basePackage" value="adweb.dao"></property>
         <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
     </bean>
 
