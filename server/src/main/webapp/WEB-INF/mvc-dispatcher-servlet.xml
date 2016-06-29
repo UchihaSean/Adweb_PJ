@@ -18,7 +18,8 @@
     <!--
         配置静态资源，直接映射到对应的文件夹，不被DispatcherServlet处理，3.04新增功能，需要重新设置spring-mvc-3.0.xsd
     -->
-    <!--<mvc:resources mapping="/css/**" location="/css/" />-->
+    <mvc:resources mapping="pages/**" location="/WEB-INF/pages/" />
+    <mvc:resources mapping="resources/**" location="/WEB-INF/resources/" />
 
     <!-- 定义跳转的文件的前后缀 ，视图模式配置-->
     <bean id="viewResolver"

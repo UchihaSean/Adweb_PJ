@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title></title>
+    <script src="js/jquery.js"></script>
+</head>
+
+<body>
+
+<form id="uploadForm" action="../upload" method="post" enctype="multipart/form-data">
+    <div>
+        <input type="file" id="fileData" name="fileData"/>
+        <input type="submit" id="submitContent" value="upload"/>
+    </div>
+</form>
+
+
+<script>
+    $("#uploadForm").submit(function (e) {
+        e.preventDefault();
+        var $form = $("#uploadForm");
+        var fd = new FormData($(this)[0]);
+        console.info(fd);
+        $.ajax({
+            type: 'POST',
+            url: $form.attr('action'),
+            data: fd,
+            cache: false,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                console.info(response);
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                console.info("Status: " + XMLHttpRequest);
+                alert("Status: " + textStatus);
+                alert("Error: " + errorThrown);
+            }
+        });
+    })
+</script>
+</body>
+
+</html>
