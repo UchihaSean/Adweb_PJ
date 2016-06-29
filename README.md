@@ -6,37 +6,43 @@
  - user_name 用户名
  - user_password 用户密码
  - user_photo 用户头像
- - view_id 心愿 景观id
- - view_id 足迹 景观id
- - view_id 收藏 景观id    
  
+
+### collect 收藏表
+ - user_id 用户id
+ - view_id 景观id
+
+### track 足迹表
+ - user_id 用户id
+ - view_id 景观id
+ 
+
+### wish 心愿表
+ - user_id 用户id
+ - view_id 景观id
 
 ### View 景观表
  - view_id 景观id
  - view_name 景观名
  - view_location 经纬度
  - view_category 景观类别id(两种以上即可)
- - view_grade_number 评分数
- - view_wish_number 心愿数
- - view_trace_number 足迹数
- - view_collect_number 收藏数
  - view_detail 详细介绍
- - view_picture 图片
- - view_survey_address 调查问卷地址(流程里要求评分细则中没要求)
- 
-
-### ViewCategory 景观类别表
- - view_category_id 景观类别id
- - view_category_name 景观类别名
- - view_id 包含景观id
+ - view_picture_url 图片
+ - view_survey 调查问卷(流程里要求评分细则中没要求)
  
 
 
-### CommentCategory 评论类别表
- - comment_category_id 评论类别id
- - comment_category_name 评论类别名
- 
 
+### FlagCategory 标志表
+ - flag_category_id 标志类别id
+ - flag_id 标志id
+ - flag_name 标志名
+
+
+### FlagView 标志景观表
+- flag_id 标志id
+- view_id 景观id
+- flag_view_location 标志在该景观内的地址
 
 ### Comment 评论表
  - comment_id 评论id
@@ -44,14 +50,9 @@
  - user_id 用户id
  - comment_grade 评分(0-5)
  - comment_detail 评论内容
- - comment_category_id 评论类别
  
  
 
-### Search 搜索记录表
- - search_id 搜索id
- - search_detail 搜索内容
- - view_id 搜索匹配评论id
  
 
 
@@ -86,7 +87,7 @@
 ```
   getViewCommentGrade(view_id) 景观id
   功能：获取景观的总评分和各星级评分比例
-  return all_comment_grade,one_star_percent,two_star_percent,three_star_percent,four_star_percent,five_star_percent 总评分，1-5星评分百分比
+  return comment_grade_number,one_star_percent,two_star_percent,three_star_percent,four_star_percent,five_star_percent 总评分，1-5星评分百分比
 ```
 ```
   getViewComments(view_id) 景观id
@@ -99,32 +100,35 @@
   return view_detail 景观信息
 ```
 ```
-  addViewTrack(user_id,view_id，add_id) 用户id，景观id、add_id和之前sorted_id相同(收藏2足迹3心愿4)
+  addView(user_id,view_id，add_id) 用户id，景观id、add_id和之前sorted_id相同(收藏2足迹3心愿4)
   功能：添加到该用户足迹、心愿和收藏
   return true 添加成功
 ```
 ```
   getViewPicture(view_id) 景观id
   功能：获取景观图片
-  return view_picture 景观图片
+  return view_picture_url 景观url
 ```
 ```
   getViewLocation(view_id) 景观id
   功能：获取景观地址
   return view_Location 景观地址
 ```
+
 ```
-  getAllCommentCategory() 无参数
-  功能：获取所有评论分类
-  return comment_category_id,comment_category_name 所有评论分类id和名字
-```
-```
-  getCommentByCategory(comment_category_id) 评论分类id
-  功能：获取该评论分类下的评论
-  return comment_detail 该评论分类下的评论内容
+  getFlagByCategory(flag_category_id) 评论分类id(活动类型1场所类型2建议3)
+  功能：获取该评论标志分类下
+  return flag_detail 该评论标志分类下的评论内容
 ```
 ```
-  addComment(comment_category_id,user_id,comment_detail,comment_grade) 评论分类、用户id、评论内容和评分
+  addFlag(flag_id，view_id) 标志id
+  功能：添加标志
+  return true 添加成功
+```
+```
+  addComment(user_id,view_id,comment_detail,comment_grade) 用户id、景观id、评论内容和评分
+  功能：添加评论
+  return true 添加成功
 ```
 ### 附近
 ```
@@ -132,17 +136,7 @@
   功能:依据不同排序依据，对当前位置附近景点进行排序
   return view_id,view_name,view_grade_number(collect/track/wish)附近的景观id、名称、评分(收藏数/足迹数/心愿数)
 ```
-### 搜索
-```
- getSearchHistory() 无参数
- 功能：获取搜索记录
- return search_id,search_detail,view_id,view_name 搜索id、搜索内容，搜索匹配景观id和名字
-```
-``` 
- addSearch(search_detail) 搜索内容
- 功能：添加入搜索历史
- return true 搜索记录添加成功(还可以进行匹配记录)
-```
+
 ### 路线规划
 调用api
 ### 我的
