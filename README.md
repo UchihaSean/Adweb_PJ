@@ -8,7 +8,9 @@
  - user_photo 用户头像
  - view_id 心愿 景观id
  - view_id 足迹 景观id
- - view_id 收藏 景观id
+ - view_id 收藏 景观id    
+ 
+
 ### View 景观表
  - view_id 景观id
  - view_name 景观名
@@ -21,13 +23,21 @@
  - view_detail 详细介绍
  - view_picture 图片
  - view_survey_address 调查问卷地址(流程里要求评分细则中没要求)
+ 
+
 ### ViewCategory 景观类别表
  - view_category_id 景观类别id
  - view_category_name 景观类别名
  - view_id 包含景观id
+ 
+
+
 ### CommentCategory 评论类别表
  - comment_category_id 评论类别id
  - comment_category_name 评论类别名
+ 
+
+
 ### Comment 评论表
  - comment_id 评论id
  - view_id 景观id
@@ -35,10 +45,16 @@
  - comment_grade 评分(0-5)
  - comment_detail 评论内容
  - comment_category_id 评论类别
+ 
+ 
+
 ### Search 搜索记录表
  - search_id 搜索id
  - search_detail 搜索内容
  - view_id 搜索匹配评论id
+ 
+
+
 
 ## 基本流程接口
 ### 主页
