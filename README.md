@@ -1,9 +1,6 @@
-# 高级web接口
+# 高级WEB最新版的开发规范请看这里 -----> https://www.zybuluo.com/dugu9sword/note/421826
 
-
-# 修改版的的开发规范请看这里 -----> https://www.zybuluo.com/dugu9sword/note/421826
-
-
+# 高级 WEB 接口
 
 ## 数据库
 ### Person 用户表
