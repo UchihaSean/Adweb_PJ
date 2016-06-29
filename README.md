@@ -149,7 +149,7 @@
  showUser(user_id,show_id) 用户id、show依据和之前sorted_id相同(收藏2足迹3心愿4)
  功能：获取该用户收藏、足迹或者心愿单
  return view_id,view_name,view_track_number(collect/wish) 景观id，景观名以及收藏数等
-``
+```
 
 
 
