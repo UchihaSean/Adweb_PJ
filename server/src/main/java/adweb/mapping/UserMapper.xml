@@ -7,8 +7,16 @@
         select * from user where name = #{name}
     </select>
 
+    <select id="selectByUid" resultType="adweb.model.User" parameterType="java.lang.Integer" >
+        select * from user where uid = #{uid}
+    </select>
+
     <insert id="insert" parameterType="adweb.model.User" useGeneratedKeys="true" keyProperty="uid">
         insert into user (name, password) values (#{name},#{password})
     </insert>
+
+    <update id="updatePortrait" parameterType="adweb.model.User">
+        update user set portrait=#{portrait} where uid=#{uid}
+    </update>
 
 </mapper>

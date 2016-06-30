@@ -1,4 +1,4 @@
-package adweb;
+package adweb.controller;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;

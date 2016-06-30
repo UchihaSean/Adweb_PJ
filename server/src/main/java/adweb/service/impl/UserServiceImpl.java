@@ -1,13 +1,18 @@
 package adweb.service.impl;
 
+import adweb.Config;
 import adweb.dao.UserDao;
 import adweb.model.User;
 import adweb.service.UserService;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.File;
+import java.util.Random;
 
 /**
  * Created by zhouyi on 16-6-30.
@@ -37,7 +42,19 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public String setPortrait(int uid,MultipartFile file) {
-
-        return null;
+        String filename= RandomStringUtils.randomAlphabetic(10);
+        File toSave=new File(Config.RESOURCE_FOLDER+filename);
+        try {
+            if(toSave.exists())
+                toSave.delete();
+            toSave.createNewFile();
+            file.transferTo(toSave);
+            User user=userDao.selectByUid(uid);
+            user.setPortrait(filename);
+            userDao.updatePortrait(user);
+        }catch (Exception e){
+            return "-1";
+        }
+        return filename;
     }
 }

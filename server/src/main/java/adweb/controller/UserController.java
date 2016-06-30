@@ -20,20 +20,20 @@ public class UserController {
 
     @RequestMapping("/register/{username}/{password}")
     public HashMap register(@PathVariable String username,
-                            @PathVariable String password){
-        return Maps.newHashMap(ImmutableMap.of("value",userService.register(username,password)));
+                            @PathVariable String password) {
+        return Maps.newHashMap(ImmutableMap.of("value", userService.register(username, password)));
     }
 
     @RequestMapping("/login/{username}/{password}")
     public HashMap login(@PathVariable String username,
-                            @PathVariable String password){
-        return Maps.newHashMap(ImmutableMap.of("value",userService.login(username,password)));
+                         @PathVariable String password) {
+        return Maps.newHashMap(ImmutableMap.of("value", userService.login(username, password)));
     }
 
     @RequestMapping(value = "/portrait/{uid}", headers = "content-type=multipart/*", method = RequestMethod.POST)
     public HashMap upload(@PathVariable int uid,
-            @RequestParam("fileData")MultipartFile fileData){
-        return Maps.newHashMap(ImmutableMap.of("value",userService.setPortrait(uid,fileData)));
+                          @RequestParam("fileData") MultipartFile fileData) {
+        return Maps.newHashMap(ImmutableMap.of("value", userService.setPortrait(uid, fileData)));
     }
 
 }

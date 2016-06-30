@@ -11,7 +11,9 @@ import org.springframework.stereotype.Component;
 public interface UserDao {
     public int insert(User user);
 
-//    public int updatePortrait(User user);
+    public int updatePortrait(User user);
 
     public User selectByName(String name);
+
+    public User selectByUid(int uid);
 }
