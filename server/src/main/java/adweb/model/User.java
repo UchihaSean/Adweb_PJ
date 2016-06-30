@@ -4,7 +4,7 @@ package adweb.model;
  * Created by zhouyi on 16-6-30.
  */
 public class User {
-    private Integer uid;
+    private int uid;
     private String name;
     private String password;
     private String portrait;
@@ -18,11 +18,11 @@ public class User {
 
     }
 
-    public Integer getUid() {
+    public int getUid() {
         return uid;
     }
 
-    public void setUid(Integer uid) {
+    public void setUid(int uid) {
         this.uid = uid;
     }
 

@@ -1,39 +1,38 @@
 package adweb.service.impl;
 
 import adweb.Config;
-import adweb.dao.UserDao;
+import adweb.dao.Dao;
 import adweb.model.User;
-import adweb.service.UserService;
+import adweb.model.View;
+import adweb.service.AdwebService;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.io.File;
-import java.util.Random;
+import java.util.List;
 
 /**
  * Created by zhouyi on 16-6-30.
  */
 @Service
-public class UserServiceImpl implements UserService{
+public class AdwebServiceImpl implements AdwebService {
     @Resource
-    private UserDao userDao;
+    private Dao dao;
 
     @Override
     public int register(String username, String password) {
-        if(userDao.selectByName(username)!=null)
+        if(dao.selectByName(username)!=null)
             return -1;//用户已存在
         User user=new User(username,password);
-        int success=userDao.insert(user);
+        int success= dao.insert(user);
         return success==1?user.getUid():-1;//成功或其他错误
     }
 
     @Override
     public int login(String username, String password) {
-        User user=userDao.selectByName(username);
+        User user= dao.selectByName(username);
         if(user==null)
             return -1;//用户不存在
         boolean success=user.getPassword().equals(password);
@@ -49,12 +48,17 @@ public class UserServiceImpl implements UserService{
                 toSave.delete();
             toSave.createNewFile();
             file.transferTo(toSave);
-            User user=userDao.selectByUid(uid);
+            User user= dao.selectByUid(uid);
             user.setPortrait(filename);
-            userDao.updatePortrait(user);
+            dao.updatePortrait(user);
         }catch (Exception e){
             return "-1";
         }
         return filename;
+    }
+
+    @Override
+    public List<View> getActions(int uid, int aid) {
+        return dao.selectByUidAndAid(uid,aid);
     }
 }
