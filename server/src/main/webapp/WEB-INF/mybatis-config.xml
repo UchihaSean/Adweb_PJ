@@ -3,6 +3,6 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <mappers>
-        <!--<mapper resource="adweb/mapping/PictureMapper.xml" />-->
+        <mapper resource="adweb/mapping/UserMapper.xml" />
     </mappers>
 </configuration>
