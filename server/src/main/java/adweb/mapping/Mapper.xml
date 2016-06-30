@@ -19,11 +19,106 @@
         update user set portrait=#{portrait} where uid=#{uid}
     </update>
 
-    <select id="selectByUidAndAid" resultType="adweb.model.View" parameterType="java.lang.String" >
+    <select id="selectByUidAndAid" resultType="adweb.model.View" parameterType="java.util.HashMap" >
         SELECT
         view.vid,view.category,view.name,view.longitude,view.latitude,view.detail,view.picture
         FROM user INNER JOIN action INNER JOIN view
-        WHERE
-        action.uid={#uid} AND action.aid=#{#aid}
+        ON user.uid=action.uid AND view.vid=action.vid
+        WHERE action.uid=#{uid} AND action.aid=#{aid}
     </select>
+
+    <select id="getViewInfo" resultType="adweb.model.View" parameterType="java.lang.Integer">
+        select * from view where vid=#{vid}
+    </select>
+
+    <select id="getCategoryOfView" resultType="adweb.model.View" parameterType="java.lang.Integer">
+        select * from view where category=#{category}
+    </select>
+
+    <select id="searchView" resultType="adweb.model.View" parameterType="java.lang.String">
+        select * from view where name like CONCAT(CONCAT('%', #{name}), '%');
+    </select>
+    
+    <select id="rankByCollect" resultType="java.util.HashMap">
+        select view.vid,view.name,count(aid) as collect_number from view,action
+        where view.vid=action.vid and action.aid=0
+        group by action.vid
+        order by collect_number desc
+    </select>
+
+    <select id="rankByTrack" resultType="java.util.HashMap">
+        select view.vid,view.name,count(action.aid) as track_number from view,action
+        where view.vid=action.vid and action.aid=1
+        group by action.vid
+        order by track_number desc
+    </select>
+
+    <select id="rankByWish" resultType="java.util.HashMap">
+        select view.vid,view.name,count(action.aid) as wish_number from view,action
+        where view.vid=action.vid and action.aid=2
+        group by action.vid
+        order by wish_number desc
+    </select>
+
+    <select id="rankByGrade" resultType="java.util.HashMap">
+        select view.vid,view.name,avg(comment.grade) as grade_number from view,comment
+        where view.vid=comment.vid
+        group by view.vid
+        order by grade_number desc
+    </select>
+
+    <select id="gradeOfView" resultType="java.util.HashMap" parameterType="java.lang.Integer">
+        select comment.grade,count(comment.grade) as grade_number
+        from view,comment
+        where view.vid=comment.vid and view.vid=#{vid}
+        group by comment.grade
+    </select>
+
+    <select id="getAllComments" resultType="java.util.HashMap" parameterType="java.lang.Integer">
+        select user.uid,user.name,comment.grade,comment.detail from comment,user
+        where comment.vid=#{vid} and comment.uid=user.uid
+    </select>
+
+    <insert id="addAction" parameterType="java.util.HashMap">
+        insert into action values(#{uid},#{vid},#{aid})
+    </insert>
+
+    <select id="getFlagTypeZero" resultType="java.util.HashMap" >
+        select * from flag
+        where (flag.fid BETWEEN 0 and 4)
+    </select>
+
+    <select id="getFlagTypeOne" resultType="java.util.HashMap" >
+        select * from flag
+        where (flag.fid BETWEEN 5 and 11)
+    </select>
+
+    <select id="getFlagTypeTwo" resultType="java.util.HashMap">
+        select * from flag
+        where  (flag.fid BETWEEN 12 and 17)
+    </select>
+
+    <insert id="addFlag" parameterType="adweb.model.Flag">
+        insert into flag values(#{fid},#{vid},#{longitude},#{latitude},#{addition})
+    </insert>
+
+    <select id="getUserCollect" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+        select * from action,view
+        where action.uid=#{uid} and action.vid=view.vid and action.aid=0
+    </select>
+
+    <select id="getUserTrack" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+        select * from action,view
+        where action.uid=#{uid} and action.vid=view.vid and action.aid=1
+    </select>
+
+    <select id="getUserWish" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+        select * from action,view
+        where action.uid=#{uid} and action.vid=view.vid and action.aid=2
+    </select>
+
+    <insert id="addComment" parameterType="adweb.model.Comment" useGeneratedKeys="true" keyProperty="cid">
+        insert into comment(vid,uid,grade,detail,resourceId) values(#{vid},#{uid},#{grade},#{detail},#{resourceId})
+    </insert>
+
 </mapper>
