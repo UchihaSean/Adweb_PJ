@@ -43,7 +43,7 @@
       <column name="uid" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="grade" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="detail" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
-      <column name="resourceId" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="rid" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="cid"/>
     </table>
     <table name="flag" schema="" catalog="adweb" type="TABLE">

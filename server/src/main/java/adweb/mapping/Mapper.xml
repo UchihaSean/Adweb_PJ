@@ -118,7 +118,7 @@
     </select>
 
     <insert id="addComment" parameterType="adweb.model.Comment" useGeneratedKeys="true" keyProperty="cid">
-        insert into comment(vid,uid,grade,detail,resourceId) values(#{vid},#{uid},#{grade},#{detail},#{resourceId})
+        insert into comment(vid,uid,grade,detail,rid) values(#{vid},#{uid},#{grade},#{detail},#{resourceId})
     </insert>
 
 </mapper>
