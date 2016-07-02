@@ -52,6 +52,9 @@ CREATE TABLE `comment` (
   `uid` int(11) DEFAULT NULL,
   `grade` int(11) DEFAULT NULL,
   `detail` varchar(100) DEFAULT NULL,
+  `url` varchar(10) DEFAULT NULL,
+  `type` int(11) DEFAULT NULL,
+  `addtion` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`cid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -88,30 +91,6 @@ CREATE TABLE `flag` (
 LOCK TABLES `flag` WRITE;
 /*!40000 ALTER TABLE `flag` DISABLE KEYS */;
 /*!40000 ALTER TABLE `flag` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `resource`
---
-
-DROP TABLE IF EXISTS `resource`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `resource` (
-  `cid` int(11) DEFAULT NULL,
-  `url` varchar(10) DEFAULT NULL,
-  `type` int(11) DEFAULT NULL,
-  `addtion` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `resource`
---
-
-LOCK TABLES `resource` WRITE;
-/*!40000 ALTER TABLE `resource` DISABLE KEYS */;
-/*!40000 ALTER TABLE `resource` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -179,4 +158,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-07-02 18:06:55
+-- Dump completed on 2016-07-02 18:40:11
