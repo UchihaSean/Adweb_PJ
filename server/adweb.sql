@@ -35,7 +35,7 @@ CREATE TABLE `action` (
 
 LOCK TABLES `action` WRITE;
 /*!40000 ALTER TABLE `action` DISABLE KEYS */;
-INSERT INTO `action` VALUES (1,1,0),(1,1,1),(1,1,2);
+INSERT INTO `action` VALUES (1,1,0),(1,1,1),(1,1,2),(1,2,2),(1,3,1),(1,3,0),(2,1,0),(2,1,2),(2,3,1),(2,3,1),(3,1,1),(3,2,2),(3,3,2),(3,4,1);
 /*!40000 ALTER TABLE `action` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -179,4 +179,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-07-02 17:26:48
+-- Dump completed on 2016-07-02 17:45:13
