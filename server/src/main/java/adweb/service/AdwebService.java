@@ -47,4 +47,6 @@ public interface AdwebService {
     public boolean addComment(int uid,int vid,int grade,String detail,String resourceId);
 
     public List<HashMap> rankOfNeighbour(int aid,double longitude,double latitude);
+
+    public List<View> routeSchedule(double longitude_x,double latitude_x,double longitude_y,double latitude_y);
 }

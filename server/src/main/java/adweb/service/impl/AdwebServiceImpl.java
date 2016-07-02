@@ -203,7 +203,7 @@ public class AdwebServiceImpl implements AdwebService {
     }
 
     public List<HashMap> rankOfNeighbour(int aid,double longitude,double latitude){
-        List<HashMap> hashMaps,ansMaps=new LinkedList<HashMap>();
+        List<HashMap> hashMaps=new LinkedList<HashMap>(),ansMaps=new LinkedList<HashMap>();
         double distance=20;
         if (aid==0)
             hashMaps= dao.rankOfNeighbourByCollect();
@@ -225,6 +225,29 @@ public class AdwebServiceImpl implements AdwebService {
             }
         }
         return ansMaps;
+    }
+
+    public List<View> routeSchedule(double longitude_x,double latitude_x,double longitude_y,double latitude_y){
+        if (longitude_x>longitude_y){
+            double longitude=longitude_x;
+            longitude_x=longitude_y;
+            longitude_y=longitude;
+        }
+        if (latitude_x>latitude_y){
+            double latitude=latitude_x;
+            latitude_x=latitude_y;
+            latitude_y=latitude;
+        }
+        List<View> listView=new LinkedList<View>(),ansView=new LinkedList<View>();
+        listView=dao.getAllView();
+        for (int i=0;i<listView.size();i++){
+            double nowLong=(Float)listView.get(i).getLongitude();
+            double nowLat=(Float)listView.get(i).getLatitude();
+            if ((nowLat>latitude_x)&&(nowLat<latitude_y)&&(nowLong>longitude_x)&&(nowLong<longitude_y)){
+                ansView.add(listView.get(i));
+            }
+        }
+        return ansView;
     }
 
 }

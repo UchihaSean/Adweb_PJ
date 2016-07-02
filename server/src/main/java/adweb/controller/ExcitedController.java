@@ -111,8 +111,9 @@ public class ExcitedController {
         return adwebService.addComment(uid,vid,grade,detail,resourceId);
     }
 
-//    @RequestMapping(value="/user/{uid}/{aid}")
-//    public List<HashMap> getUserAction(@PathVariable int uid,@PathVariable int aid){
-//        return adwebService.getUserAction(uid,aid);
-//    }
+    @RequestMapping(value="/route/schedule/{longitude_x}/{latitude_x}/{longitude_y}/{latitude_y}")
+    public List<View> routeSchedule(@PathVariable double longitude_x,@PathVariable double latitude_x,
+                                    @PathVariable double longitude_y,@PathVariable double latitude_y){
+        return adwebService.routeSchedule(longitude_x,latitude_x,longitude_y,latitude_y);
+    }
 }
