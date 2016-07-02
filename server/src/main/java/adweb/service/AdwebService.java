@@ -51,5 +51,5 @@ public interface AdwebService {
 
     public List<HashMap> rankOfNeighbour(int aid,double longitude,double latitude);
 
-    public List<View> routeSchedule(double longitude_x,double latitude_x,double longitude_y,double latitude_y);
+    public List<View> routeSchedule(String name_x,String name_y);
 }
