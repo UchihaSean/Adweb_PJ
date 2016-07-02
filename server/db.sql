@@ -81,8 +81,8 @@ DROP TABLE IF EXISTS `flag`;
 CREATE TABLE `flag` (
   `fid` int(11) DEFAULT NULL,
   `vid` int(11) DEFAULT NULL,
-  `latitude` float DEFAULT NULL,
   `longitude` float DEFAULT NULL,
+  `latitude` float DEFAULT NULL,
   `addtion` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -156,8 +156,8 @@ CREATE TABLE `view` (
   `vid` int(11) NOT NULL AUTO_INCREMENT,
   `category` int(11) DEFAULT NULL,
   `name` varchar(20) DEFAULT NULL,
-  `latitude` float DEFAULT NULL,
   `longitude` float DEFAULT NULL,
+  `latitude` float DEFAULT NULL,
   `detail` varchar(100) DEFAULT NULL,
   `picture` varchar(10) DEFAULT NULL,
   `scope` varchar(300) DEFAULT NULL,
@@ -171,7 +171,7 @@ CREATE TABLE `view` (
 
 LOCK TABLES `view` WRITE;
 /*!40000 ALTER TABLE `view` DISABLE KEYS */;
-INSERT INTO `view` VALUES (1,0,'复旦大学张江校区',31.1905,121.598,'复旦是个好学校',NULL,'31.191340,121.594715,31.192258,121.600959,31.185867,121.601515,31.185518,121.599015,31.188584,121.597717,31.188198,121.595410');
+INSERT INTO `view` VALUES (1,0,'复旦大学张江校区',121.605522,31.195101,'复旦是个好学校',NULL,'121.601307,31.197314,121.607451,31.198056,121.607972,31.191708,121.605475,31.191353,121.604073,31.194581,121.601864,31.194272');
 /*!40000 ALTER TABLE `view` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
