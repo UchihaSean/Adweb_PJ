@@ -42,11 +42,10 @@ public interface AdwebService {
 
     public boolean addFlag(int fid,int vid,double longitude,double latitude,String addition);
 
-    public List<HashMap> getUserAction(int uid,int aid);
 
     public String setPicture(MultipartFile file);
 
-    public boolean addComment(int uid,int vid,int grade,String detail,String resourceId);
+    public boolean addComment(int uid,int vid,int grade,String detail,String url,int type,String addition);
 
     public List<HashMap> rankOfNeighbour(int aid,double longitude,double latitude);
 

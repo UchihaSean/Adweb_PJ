@@ -6,15 +6,20 @@ package adweb.model;
 public class Comment {
     private int cid;
     private int vid;
+    private int uid;
     private int grade;
     private String detail;
-    private String resourceId;
-    public Comment(int cid,int vid,int grade,String detail,String resourceId){
-        this.cid=cid;
+    private String url;
+    private int type;
+    private String addition;
+    public Comment(int vid,int uid,int grade,String detail,String url,int type,String addition){
         this.vid=vid;
         this.grade=grade;
         this.detail=detail;
-        this.resourceId=resourceId;
+        this.uid=uid;
+        this.url=url;
+        this.type=type;
+        this.addition=addition;
     }
     public Comment(){}
     public void setCid(int cid){
@@ -29,8 +34,17 @@ public class Comment {
     public void setDetail(String detail){
         this.detail=detail;
     }
-    public void setResourceId(String resourceId){
-        this.resourceId=resourceId;
+    public void setUid(int uid){
+        this.uid=uid;
+    }
+    public void setUrl(String url){
+        this.url=url;
+    }
+    public void setType(int type){
+        this.type=type;
+    }
+    public void setAddition(String addition){
+        this.addition=addition;
     }
     public int getCid(){
         return cid;
@@ -44,7 +58,16 @@ public class Comment {
     public String getDetail(){
         return detail;
     }
-    public String getResourceId(){
-        return resourceId;
+    public int getUid(){
+        return uid;
+    }
+    public String getUrl(){
+        return url;
+    }
+    public int getType(){
+        return type;
+    }
+    public String getAddition(){
+        return addition;
     }
 }

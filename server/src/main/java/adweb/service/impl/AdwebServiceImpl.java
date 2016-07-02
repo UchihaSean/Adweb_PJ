@@ -178,18 +178,6 @@ public class AdwebServiceImpl implements AdwebService {
     }
 
     @Override
-    public List<HashMap> getUserAction(int uid,int aid){
-        if (aid==0){
-            return dao.getUserCollect(uid);
-        } else if (aid==1){
-            return dao.getUserTrack(uid);
-        } else if (aid==2){
-            return dao.getUserWish(uid);
-        }
-        return null;
-    }
-
-    @Override
     public String setPicture(MultipartFile file) {
         String filename= RandomStringUtils.randomAlphabetic(10);
         File toSave=new File(Config.RESOURCE_FOLDER+filename);
@@ -207,9 +195,9 @@ public class AdwebServiceImpl implements AdwebService {
         return filename;
     }
 
-    public boolean addComment(int uid,int vid,int grade,String detail,String resourceId){
+    public boolean addComment(int uid,int vid,int grade,String detail,String url,int type,String addition){
         if (grade==0) return false;
-        Comment comment=new Comment(uid,vid,grade,detail,resourceId);
+        Comment comment=new Comment(vid,uid,grade,detail,url,type,addition);
         dao.addComment(comment);
         return true;
     }

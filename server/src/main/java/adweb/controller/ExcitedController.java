@@ -107,13 +107,13 @@ public class ExcitedController {
     @RequestMapping(value = "/comment/picture", headers = "content-type=multipart/*", method = RequestMethod.POST)
     public HashMap setPicture(
                           @RequestParam("fileData") MultipartFile fileData) {
-        return Maps.newHashMap(ImmutableMap.of("value", adwebService.setPicture(fileData)));
+        return Maps.newHashMap(ImmutableMap.of("url", adwebService.setPicture(fileData)));
     }
 
-    @RequestMapping(value="/comment/add/{uid}/{vid}/{grade}/{detail}/{resourceId}")
+    @RequestMapping(value="/comment/add/{uid}/{vid}/{grade}/{detail}/{url}/{type}/{addition}")
     public boolean addComment(@PathVariable int uid,@PathVariable int vid,@PathVariable int grade,
-                              @PathVariable String detail,@PathVariable String resourceId){
-        return adwebService.addComment(uid,vid,grade,detail,resourceId);
+                              @PathVariable String detail,@PathVariable String url,@PathVariable int type,@PathVariable String addition){
+        return adwebService.addComment(uid,vid,grade,detail,url,type,addition);
     }
 
     @RequestMapping(value="/route/schedule/{longitude_x}/{latitude_x}/{longitude_y}/{latitude_y}")

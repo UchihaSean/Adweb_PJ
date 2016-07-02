@@ -55,12 +55,6 @@ public interface Dao {
 
     public void addFlag(Flag flag);
 
-    public List<HashMap> getUserCollect(int uid);
-
-    public List<HashMap> getUserWish(int uid);
-
-    public List<HashMap> getUserTrack(int uid);
-
     public void addComment(Comment comment);
 
     public List<HashMap> rankOfNeighbourByCollect();

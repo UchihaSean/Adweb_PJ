@@ -106,8 +106,8 @@
     </select>
 
     <select id="getAllComments" resultType="java.util.HashMap" parameterType="java.lang.Integer">
-        select user.uid,user.name,comment.grade,comment.detail from comment,user
-        where comment.vid=#{vid} and comment.uid=user.uid
+        select * from comment,resource
+        where comment.vid=#{vid} and comment.cid=resource.cid
     </select>
 
     <insert id="addAction" parameterType="java.util.HashMap">
@@ -138,23 +138,24 @@
         insert into flag values(#{fid},#{vid},#{longitude},#{latitude},#{addition})
     </insert>
 
-    <select id="getUserCollect" parameterType="java.lang.Integer" resultType="java.util.HashMap">
-        select * from action,view
-        where action.uid=#{uid} and action.vid=view.vid and action.aid=0
-    </select>
+    <!--<select id="getUserCollect" parameterType="java.lang.Integer" resultType="java.util.HashMap">-->
+        <!--select * from action,view-->
+        <!--where action.uid=#{uid} and action.vid=view.vid and action.aid=0-->
+    <!--</select>-->
 
-    <select id="getUserTrack" parameterType="java.lang.Integer" resultType="java.util.HashMap">
-        select * from action,view
-        where action.uid=#{uid} and action.vid=view.vid and action.aid=1
-    </select>
+    <!--<select id="getUserTrack" parameterType="java.lang.Integer" resultType="java.util.HashMap">-->
+        <!--select * from action,view-->
+        <!--where action.uid=#{uid} and action.vid=view.vid and action.aid=1-->
+    <!--</select>-->
 
-    <select id="getUserWish" parameterType="java.lang.Integer" resultType="java.util.HashMap">
-        select * from action,view
-        where action.uid=#{uid} and action.vid=view.vid and action.aid=2
-    </select>
+    <!--<select id="getUserWish" parameterType="java.lang.Integer" resultType="java.util.HashMap">-->
+        <!--select * from action,view-->
+        <!--where action.uid=#{uid} and action.vid=view.vid and action.aid=2-->
+    <!--</select>-->
 
     <insert id="addComment" parameterType="adweb.model.Comment" useGeneratedKeys="true" keyProperty="cid">
-        insert into comment(vid,uid,grade,detail,rid) values(#{vid},#{uid},#{grade},#{detail},#{resourceId})
+        insert into comment(vid,uid,grade,detail,url,type,addition)
+        values(#{vid},#{uid},#{grade},#{detail},#{url},#{type},#{addition})
     </insert>
 
 </mapper>
