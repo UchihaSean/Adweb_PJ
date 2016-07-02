@@ -53,9 +53,9 @@ public class ExcitedController {
         return adwebService.getViewInfo(vid);
     }
 
-    @RequestMapping(value="/view/{category}")
-    public List<View> getCategoryOfView(@PathVariable int category){
-        return adwebService.getCategoryOfView(category);
+    @RequestMapping(value="/view")
+    public List<View> getAllView(){
+        return adwebService.getAllView();
     }
 
     @RequestMapping(value="/search/{name}")
@@ -63,9 +63,9 @@ public class ExcitedController {
         return adwebService.searchView(name);
     }
 
-    @RequestMapping(value="/rankings/{aid}")
-    public List<HashMap> rankByAction(@PathVariable int aid){
-        return adwebService.rankByAction(aid);
+    @RequestMapping(value="/rankings/{category}/{aid}")
+    public List<HashMap> rankByAction(@PathVariable int category,@PathVariable int aid){
+        return adwebService.rankByAction(category,aid);
     }
 
     @RequestMapping(value="/grade/{vid}")
@@ -94,9 +94,9 @@ public class ExcitedController {
         return adwebService.addFlag(fid, vid, longitude, latitude, addition);
     }
 
-    @RequestMapping(value="/neighbour/{aid}")
-    public List<HashMap> rankOfNeighbour(@PathVariable int aid){
-        return adwebService.rankByAction(aid);
+    @RequestMapping(value="/neighbour/{aid}/{longitude}/{latitude}")
+    public List<HashMap> rankOfNeighbour(@PathVariable int aid,@PathVariable double longitude,@PathVariable double latitude){
+        return adwebService.rankOfNeighbour(aid, longitude, latitude);
     }
 
     @RequestMapping(value = "/comment/picture", headers = "content-type=multipart/*", method = RequestMethod.POST)

@@ -27,17 +27,17 @@ public interface Dao {
 
     public View getViewInfo(int vid);
 
-    public List<View> getCategoryOfView(int category);
+    public List<View> getAllView();
 
     public List<View> searchView(String name);
 
-    public List<HashMap> rankByCollect();
+    public List<HashMap> rankByCollect(int category);
 
-    public List<HashMap> rankByTrack();
+    public List<HashMap> rankByTrack(int category);
 
-    public List<HashMap> rankByWish();
+    public List<HashMap> rankByWish(int category);
 
-    public List<HashMap> rankByGrade();
+    public List<HashMap> rankByGrade(int category);
 
     public List<HashMap> gradeOfView(int vid);
 
@@ -60,4 +60,13 @@ public interface Dao {
     public List<HashMap> getUserTrack(int uid);
 
     public void addComment(Comment comment);
+
+    public List<HashMap> rankOfNeighbourByCollect();
+
+    public List<HashMap> rankOfNeighbourByTrack();
+
+    public List<HashMap> rankOfNeighbourByWish();
+
+    public List<HashMap> rankOfNeighbourByGrade();
+
 }

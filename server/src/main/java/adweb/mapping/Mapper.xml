@@ -31,41 +31,72 @@
         select * from view where vid=#{vid}
     </select>
 
-    <select id="getCategoryOfView" resultType="adweb.model.View" parameterType="java.lang.Integer">
-        select * from view where category=#{category}
+    <select id="getAllView" resultType="adweb.model.View">
+        select * from view
     </select>
 
     <select id="searchView" resultType="adweb.model.View" parameterType="java.lang.String">
         select * from view where name like CONCAT(CONCAT('%', #{name}), '%');
     </select>
     
-    <select id="rankByCollect" resultType="java.util.HashMap">
+    <select id="rankByCollect" resultType="java.util.HashMap" parameterType="java.lang.Integer">
         select view.vid,view.name,count(aid) as collect_number from view,action
-        where view.vid=action.vid and action.aid=0
+        where view.vid=action.vid and action.aid=0 and view.category=#{category}
         group by action.vid
         order by collect_number desc
     </select>
 
-    <select id="rankByTrack" resultType="java.util.HashMap">
+    <select id="rankByTrack" resultType="java.util.HashMap" parameterType="java.lang.Integer">
         select view.vid,view.name,count(action.aid) as track_number from view,action
-        where view.vid=action.vid and action.aid=1
+        where view.vid=action.vid and action.aid=1 and view.category=#{category}
         group by action.vid
         order by track_number desc
     </select>
 
-    <select id="rankByWish" resultType="java.util.HashMap">
+    <select id="rankByWish" resultType="java.util.HashMap" parameterType="java.lang.Integer">
         select view.vid,view.name,count(action.aid) as wish_number from view,action
+        where view.vid=action.vid and action.aid=2 and view.category=#{category}
+        group by action.vid
+        order by wish_number desc
+    </select>
+
+    <select id="rankByGrade" resultType="java.util.HashMap" parameterType="java.lang.Integer">
+        select view.vid,view.name,avg(comment.grade) as grade_number from view,comment
+        where view.vid=comment.vid and view.category=#{category}
+        group by view.vid
+        order by grade_number desc
+    </select>
+
+    <!-- -->
+    <select id="rankOfNeighbourByGrade" resultType="java.util.HashMap">
+        select view.vid,view.name,view.longitude,view.latitude,view.category,avg(comment.grade) as grade_number from view,comment
+        where view.vid=comment.vid
+        group by view.vid
+        order by grade_number desc
+    </select>
+
+    <select id="rankOfNeighbourByWish" resultType="java.util.HashMap">
+        select view.vid,view.name,view.longitude,view.latitude,view.category,count(action.aid) as wish_number from view,action
         where view.vid=action.vid and action.aid=2
         group by action.vid
         order by wish_number desc
     </select>
 
-    <select id="rankByGrade" resultType="java.util.HashMap">
-        select view.vid,view.name,avg(comment.grade) as grade_number from view,comment
-        where view.vid=comment.vid
-        group by view.vid
-        order by grade_number desc
+    <select id="rankOfNeighbourByTrack" resultType="java.util.HashMap">
+        select view.vid,view.name,view.longitude,view.latitude,view.category,count(action.aid) as track_number from view,action
+        where view.vid=action.vid and action.aid=1
+        group by action.vid
+        order by track_number desc
     </select>
+
+    <select id="rankOfNeighbourByCollect" resultType="java.util.HashMap">
+        select view.vid,view.name,view.longitude,view.latitude,,view.category,count(aid) as collect_number from view,action
+        where view.vid=action.vid and action.aid=0
+        group by action.vid
+        order by collect_number desc
+    </select>
+
+    <!---->
 
     <select id="gradeOfView" resultType="java.util.HashMap" parameterType="java.lang.Integer">
         select comment.grade,count(comment.grade) as grade_number

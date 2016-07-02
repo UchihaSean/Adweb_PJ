@@ -24,11 +24,11 @@ public interface AdwebService {
 
     public View getViewInfo(int vid);
 
-    public List<View> getCategoryOfView(int category);
+    public List<View> getAllView();
 
     public List<View> searchView(String name);
 
-    public List<HashMap> rankByAction(int aid);
+    public List<HashMap> rankByAction(int category,int aid);
 
     public HashMap gradeOfView(int vid);
 
@@ -45,4 +45,6 @@ public interface AdwebService {
     public String setPicture(MultipartFile file);
 
     public boolean addComment(int uid,int vid,int grade,String detail,String resourceId);
+
+    public List<HashMap> rankOfNeighbour(int aid,double longitude,double latitude);
 }

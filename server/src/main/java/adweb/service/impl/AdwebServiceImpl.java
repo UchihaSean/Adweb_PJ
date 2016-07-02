@@ -7,14 +7,14 @@ import adweb.model.Flag;
 import adweb.model.User;
 import adweb.model.View;
 import adweb.service.AdwebService;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.io.File;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by zhouyi on 16-6-30.
@@ -72,10 +72,8 @@ public class AdwebServiceImpl implements AdwebService {
         return dao.getViewInfo(vid);
     }
     @Override
-    public List<View> getCategoryOfView(int category){
-        if (category==1|| category==0)
-            return dao.getCategoryOfView(category);
-         return null;
+    public List<View> getAllView(){
+        return dao.getAllView();
     }
     @Override
     public List<View> searchView(String name){
@@ -83,15 +81,15 @@ public class AdwebServiceImpl implements AdwebService {
     }
 
     @Override
-    public List<HashMap> rankByAction(int aid){
+    public List<HashMap> rankByAction(int category,int aid){
         if (aid==0)
-            return dao.rankByCollect();
+            return dao.rankByCollect(category);
         else if (aid==1)
-            return dao.rankByTrack();
+            return dao.rankByTrack(category);
         else if (aid==2)
-            return dao.rankByWish();
+            return dao.rankByWish(category);
         else if (aid==3)
-            return dao.rankByGrade();
+            return dao.rankByGrade(category);
         return null;
     }
 
@@ -202,6 +200,31 @@ public class AdwebServiceImpl implements AdwebService {
         Comment comment=new Comment(uid,vid,grade,detail,resourceId);
         dao.addComment(comment);
         return true;
+    }
+
+    public List<HashMap> rankOfNeighbour(int aid,double longitude,double latitude){
+        List<HashMap> hashMaps,ansMaps=new LinkedList<HashMap>();
+        double distance=20;
+        if (aid==0)
+            hashMaps= dao.rankOfNeighbourByCollect();
+        else if (aid==1)
+            hashMaps=dao.rankOfNeighbourByTrack();
+        else if (aid==2)
+            hashMaps=dao.rankOfNeighbourByWish();
+        else if (aid==3)
+            hashMaps= dao.rankOfNeighbourByGrade();
+        else return null;
+        System.out.println(hashMaps.size());
+        for (int i=0;i<hashMaps.size();i++){
+            double nowLong=(Float)hashMaps.get(i).get("longitude");
+            double nowLat=(Float)hashMaps.get(i).get("latitude");
+            System.out.println(nowLong+" "+nowLat);
+            System.out.println(hashMaps.get(i));
+            if ((nowLong-longitude)*(nowLong-longitude)+(nowLat-latitude)*(nowLat-latitude)<distance){
+                ansMaps.add(hashMaps.get(i));
+            }
+        }
+        return ansMaps;
     }
 
 }
