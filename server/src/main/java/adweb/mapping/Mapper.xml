@@ -38,7 +38,41 @@
     <select id="searchView" resultType="adweb.model.View" parameterType="java.lang.String">
         select * from view where name like CONCAT(CONCAT('%', #{name}), '%');
     </select>
-    
+
+    <insert id="addSearchView" parameterType="java.util.HashMap">
+        insert into search(uid,vid,name) values(#{uid},#{vid},#{name})
+    </insert>
+
+    <select id="rankOfSearchByCollect" resultType="java.util.HashMap" parameterType="java.lang.Integer">
+        select view.vid,view.name,count(aid) as collect_number from view,action,search
+        where view.vid=action.vid and action.vid=search.vid and action.aid=0 and search.uid=#{uid}
+        group by action.vid
+        order by collect_number desc
+    </select>
+
+    <select id="rankOfSearchByTrack" resultType="java.util.HashMap" parameterType="java.lang.Integer">
+        select view.vid,view.name,count(action.aid) as track_number from view,action,search
+        where view.vid=action.vid and search.vid=action.vid and action.aid=1 and search.uid=#{uid}
+        group by action.vid
+        order by track_number desc
+    </select>
+
+    <select id="rankOfSearchByWish" resultType="java.util.HashMap" parameterType="java.lang.Integer">
+        select view.vid,view.name,count(action.aid) as wish_number from view,action,search
+        where view.vid=action.vid and action.vid=search.vid and action.aid=2 and search.uid=#{uid}
+        group by action.vid
+        order by wish_number desc
+    </select>
+
+    <select id="rankOfSearchByGrade" resultType="java.util.HashMap" parameterType="java.lang.Integer">
+        select view.vid,view.name,avg(comment.grade) as grade_number from view,comment,search
+        where view.vid=comment.vid and view.vid=search.vid and search.uid=#{uid}
+        group by view.vid
+        order by grade_number desc
+    </select>
+
+
+
     <select id="rankByCollect" resultType="java.util.HashMap" parameterType="java.lang.Integer">
         select view.vid,view.name,count(aid) as collect_number from view,action
         where view.vid=action.vid and action.aid=0 and view.category=#{category}
@@ -90,7 +124,7 @@
     </select>
 
     <select id="rankOfNeighbourByCollect" resultType="java.util.HashMap">
-        select view.vid,view.name,view.longitude,view.latitude,,view.category,count(aid) as collect_number from view,action
+        select view.vid,view.name,view.longitude,view.latitude,view.category,count(action.aid) as collect_number from view,action
         where view.vid=action.vid and action.aid=0
         group by action.vid
         order by collect_number desc
@@ -138,20 +172,6 @@
         insert into flag values(#{fid},#{vid},#{longitude},#{latitude},#{addition})
     </insert>
 
-    <!--<select id="getUserCollect" parameterType="java.lang.Integer" resultType="java.util.HashMap">-->
-        <!--select * from action,view-->
-        <!--where action.uid=#{uid} and action.vid=view.vid and action.aid=0-->
-    <!--</select>-->
-
-    <!--<select id="getUserTrack" parameterType="java.lang.Integer" resultType="java.util.HashMap">-->
-        <!--select * from action,view-->
-        <!--where action.uid=#{uid} and action.vid=view.vid and action.aid=1-->
-    <!--</select>-->
-
-    <!--<select id="getUserWish" parameterType="java.lang.Integer" resultType="java.util.HashMap">-->
-        <!--select * from action,view-->
-        <!--where action.uid=#{uid} and action.vid=view.vid and action.aid=2-->
-    <!--</select>-->
 
     <insert id="addComment" parameterType="adweb.model.Comment" useGeneratedKeys="true" keyProperty="cid">
         insert into comment(vid,uid,grade,detail,url,type,addition)

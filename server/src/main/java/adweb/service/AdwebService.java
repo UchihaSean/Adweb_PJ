@@ -26,7 +26,9 @@ public interface AdwebService {
 
     public List<View> getAllView();
 
-    public List<View> searchView(String name);
+    public List<View> searchView(int uid,String name);
+
+    public List<HashMap> searchHistory(int uid,int aid);
 
     public List<HashMap> rankByAction(int category,int aid);
 

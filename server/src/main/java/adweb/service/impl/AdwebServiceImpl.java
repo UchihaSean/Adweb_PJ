@@ -76,8 +76,27 @@ public class AdwebServiceImpl implements AdwebService {
         return dao.getAllView();
     }
     @Override
-    public List<View> searchView(String name){
-        return dao.searchView(name);
+    public List<View> searchView(int uid,String name){
+        HashMap hashMap=new HashMap();
+        hashMap.put("uid",uid);
+        List<View> listView=new LinkedList<View>();
+        listView=dao.searchView(name);
+        hashMap.put("vid",listView.get(0).getVid());
+        hashMap.put("name",name);
+        dao.addSearchView(hashMap);
+        return listView;
+    }
+
+    public List<HashMap> searchHistory(int uid,int aid){
+        if (aid==0)
+            return dao.rankOfSearchByCollect(uid);
+        else if (aid==1)
+            return dao.rankOfSearchByTrack(uid);
+        else if (aid==2)
+            return dao.rankOfSearchByWish(uid);
+        else if (aid==3)
+            return dao.rankOfSearchByGrade(uid);
+        return null;
     }
 
     @Override
@@ -204,7 +223,7 @@ public class AdwebServiceImpl implements AdwebService {
 
     public List<HashMap> rankOfNeighbour(int aid,double longitude,double latitude){
         List<HashMap> hashMaps=new LinkedList<HashMap>(),ansMaps=new LinkedList<HashMap>();
-        double distance=20;
+        double distance=1;
         if (aid==0)
             hashMaps= dao.rankOfNeighbourByCollect();
         else if (aid==1)

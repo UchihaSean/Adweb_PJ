@@ -58,9 +58,14 @@ public class ExcitedController {
         return adwebService.getAllView();
     }
 
-    @RequestMapping(value="/search/{name}")
-    public List<View> searchView(@PathVariable String name){
-        return adwebService.searchView(name);
+    @RequestMapping(value="/search/{uid}/{name}")
+    public List<View> searchView(@PathVariable int uid,@PathVariable String name){
+        return adwebService.searchView(uid,name);
+    }
+
+    @RequestMapping(value="/history/search/{uid}/{aid}")
+    public List<HashMap> searchHistory(@PathVariable int uid,@PathVariable int aid){
+        return adwebService.searchHistory(uid,aid);
     }
 
     @RequestMapping(value="/rankings/{category}/{aid}")
@@ -121,4 +126,6 @@ public class ExcitedController {
                                     @PathVariable double longitude_y,@PathVariable double latitude_y){
         return adwebService.routeSchedule(longitude_x,latitude_x,longitude_y,latitude_y);
     }
+
+
 }

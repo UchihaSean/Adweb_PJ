@@ -31,6 +31,16 @@ public interface Dao {
 
     public List<View> searchView(String name);
 
+    public void addSearchView(HashMap hashMap);
+
+    public List<HashMap> rankOfSearchByCollect(int uid);
+
+    public List<HashMap> rankOfSearchByTrack(int uid);
+
+    public List<HashMap> rankOfSearchByWish(int uid);
+
+    public List<HashMap> rankOfSearchByGrade(int uid);
+
     public List<HashMap> rankByCollect(int category);
 
     public List<HashMap> rankByTrack(int category);
