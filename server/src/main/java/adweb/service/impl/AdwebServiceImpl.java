@@ -246,7 +246,13 @@ public class AdwebServiceImpl implements AdwebService {
         return ansMaps;
     }
 
-    public List<View> routeSchedule(double longitude_x,double latitude_x,double longitude_y,double latitude_y){
+    public List<View> routeSchedule(String name_x,String name_y){
+        List<View> list_view_x=dao.searchView(name_x);
+        List<View> list_view_y=dao.searchView(name_y);
+        double longitude_x=list_view_x.get(0).getLongitude();
+        double latitude_x=list_view_x.get(0).getLatitude();
+        double longitude_y=list_view_y.get(0).getLongitude();
+        double latitude_y=list_view_y.get(0).getLatitude();
         if (longitude_x>longitude_y){
             double longitude=longitude_x;
             longitude_x=longitude_y;
@@ -259,6 +265,8 @@ public class AdwebServiceImpl implements AdwebService {
         }
         List<View> listView=new LinkedList<View>(),ansView=new LinkedList<View>();
         listView=dao.getAllView();
+        ansView.add(list_view_x.get(0));
+        ansView.add(list_view_y.get(0));
         for (int i=0;i<listView.size();i++){
             double nowLong=(Float)listView.get(i).getLongitude();
             double nowLat=(Float)listView.get(i).getLatitude();
