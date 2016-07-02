@@ -45,6 +45,8 @@ public interface Dao {
 
     public void addAction(HashMap hashMap);
 
+    public void deleteAction(HashMap hashMap);
+
     public List<HashMap> getFlagTypeZero();
 
     public List<HashMap> getFlagTypeOne();

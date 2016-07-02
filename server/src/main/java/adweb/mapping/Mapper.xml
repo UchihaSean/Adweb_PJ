@@ -114,6 +114,11 @@
         insert into action values(#{uid},#{vid},#{aid})
     </insert>
 
+    <delete id="deleteAction" parameterType="java.util.HashMap">
+        delete from action
+        where action.uid=#{uid} and action.vid=#{vid} and action.aid=#{aid}
+    </delete>
+
     <select id="getFlagTypeZero" resultType="java.util.HashMap" >
         select * from flag
         where (flag.fid BETWEEN 0 and 4)

@@ -36,6 +36,8 @@ public interface AdwebService {
 
     public boolean addAction(int uid,int vid,int aid);
 
+    public boolean deleteAction(int uid,int vid,int aid);
+
     public List<HashMap> getFlag(int ftype);
 
     public boolean addFlag(int fid,int vid,double longitude,double latitude,String addition);

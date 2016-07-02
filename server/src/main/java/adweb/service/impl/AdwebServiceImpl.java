@@ -145,6 +145,18 @@ public class AdwebServiceImpl implements AdwebService {
 //        return dao.addAction(uid,vid,aid);
     }
 
+    public boolean deleteAction(int uid,int vid,int aid){
+        if (aid==0 || aid==1 || aid==2) {
+            HashMap hashMap=new HashMap();
+            hashMap.put("uid",uid);
+            hashMap.put("vid",vid);
+            hashMap.put("aid",aid);
+            dao.deleteAction(hashMap);
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public List<HashMap> getFlag(int ftype){
         if (ftype==0){

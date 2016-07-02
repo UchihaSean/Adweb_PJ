@@ -83,6 +83,11 @@ public class ExcitedController {
         return adwebService.addAction(uid, vid, aid);
     }
 
+    @RequestMapping(value="/action/delete/{uid}/{vid}/{aid}")
+    public boolean deleteAction(@PathVariable int uid,@PathVariable int vid,@PathVariable int aid){
+        return adwebService.deleteAction(uid, vid, aid);
+    }
+
     @RequestMapping(value="/flag/show/{ftype}")
     public List<HashMap> getFlag(@PathVariable int ftype){
         return adwebService.getFlag(ftype);
