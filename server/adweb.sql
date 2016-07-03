@@ -35,7 +35,7 @@ CREATE TABLE `action` (
 
 LOCK TABLES `action` WRITE;
 /*!40000 ALTER TABLE `action` DISABLE KEYS */;
-INSERT INTO `action` VALUES (1,1,0),(1,1,1),(1,1,2),(1,2,2),(1,3,1),(1,3,0),(2,1,0),(2,1,2),(2,3,1),(2,3,1),(3,1,1),(3,2,2),(3,3,2),(3,4,1);
+INSERT INTO `action` VALUES (1,1,0),(1,1,1),(1,1,2),(1,2,2),(1,3,1),(1,3,0),(2,1,0),(2,1,2),(2,3,1),(2,2,1),(2,3,2),(3,1,1),(3,2,0),(3,3,2),(3,4,1),(3,4,0);
 /*!40000 ALTER TABLE `action` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -97,16 +97,7 @@ UNLOCK TABLES;
 -- Table structure for table `user`
 --
 
-DROP TABLE IF EXISTS `user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user` (
-  `uid` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) DEFAULT NULL,
-  `password` varchar(20) DEFAULT NULL,
-  `portrait` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

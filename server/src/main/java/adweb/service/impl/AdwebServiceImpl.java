@@ -43,21 +43,18 @@ public class AdwebServiceImpl implements AdwebService {
     }
 
     @Override
-    public String setPortrait(int uid,MultipartFile file) {
-        String filename= RandomStringUtils.randomAlphabetic(10);
-        File toSave=new File(Config.RESOURCE_FOLDER+filename);
-        try {
-            if(toSave.exists())
-                toSave.delete();
-            toSave.createNewFile();
-            file.transferTo(toSave);
-            User user= dao.selectByUid(uid);
-            user.setPortrait(filename);
+    public String setPortrait(int uid) {
+//        String filename= RandomStringUtils.randomAlphabetic(10);
+//        File toSave=new File(Config.RESOURCE_FOLDER+filename);
+        String url="";
+//            if(toSave.exists())
+//                toSave.delete();
+//            toSave.createNewFile();
+          url="http://img4q.duitang.com/uploads/item/201502/09/20150209203903_ZRyKL.jpeg";
+          User user= dao.selectByUid(uid);
+            user.setPortrait(url);
             dao.updatePortrait(user);
-        }catch (Exception e){
-            return "-1";
-        }
-        return filename;
+        return url;
     }
 
     @Override
@@ -177,14 +174,14 @@ public class AdwebServiceImpl implements AdwebService {
     }
 
     @Override
-    public List<HashMap> getFlag(int ftype){
+    public List<HashMap> getFlag(int ftype,int vid){
         if (ftype==0){
-            return dao.getFlagTypeZero();
+            return dao.getFlagTypeZero(vid);
         } else if (ftype==1){
-            return dao.getFlagTypeOne();
+            return dao.getFlagTypeOne(vid);
 
         } else if (ftype==2){
-            return dao.getFlagTypeTwo();
+            return dao.getFlagTypeTwo(vid);
         }
         return null;
     }
@@ -197,20 +194,10 @@ public class AdwebServiceImpl implements AdwebService {
     }
 
     @Override
-    public String setPicture(MultipartFile file) {
-        String filename= RandomStringUtils.randomAlphabetic(10);
-        File toSave=new File(Config.RESOURCE_FOLDER+filename);
-        try {
-            if(toSave.exists())
-                toSave.delete();
-            toSave.createNewFile();
-            file.transferTo(toSave);
-//            User user= dao.selectByUid(uid);
-//            user.setPortrait(filename);
-//            dao.updatePortrait(user);
-        }catch (Exception e){
-            return "-1";
-        }
+    public String setPicture() {
+//        String filename= RandomStringUtils.randomAlphabetic(10);
+//        File toSave=new File(Config.RESOURCE_FOLDER+filename);
+       String filename="http://s11.sinaimg.cn/orignal/48d703704e150311a52ea";
         return filename;
     }
 
@@ -253,6 +240,8 @@ public class AdwebServiceImpl implements AdwebService {
         double latitude_x=list_view_x.get(0).getLatitude();
         double longitude_y=list_view_y.get(0).getLongitude();
         double latitude_y=list_view_y.get(0).getLatitude();
+        int x=list_view_x.get(0).getVid();
+        int y=list_view_y.get(0).getVid();
         if (longitude_x>longitude_y){
             double longitude=longitude_x;
             longitude_x=longitude_y;
@@ -268,13 +257,31 @@ public class AdwebServiceImpl implements AdwebService {
         ansView.add(list_view_x.get(0));
         ansView.add(list_view_y.get(0));
         for (int i=0;i<listView.size();i++){
+            if (listView.get(i).getVid()==x) continue;
+            if (listView.get(i).getVid()==y) continue;
             double nowLong=(Float)listView.get(i).getLongitude();
             double nowLat=(Float)listView.get(i).getLatitude();
-            if ((nowLat>latitude_x)&&(nowLat<latitude_y)&&(nowLong>longitude_x)&&(nowLong<longitude_y)){
+
+            if ((nowLat>latitude_x-0.1)&&(nowLat<latitude_y+0.1)&&(nowLong>longitude_x-0.1)&&(nowLong<longitude_y+0.1)){
                 ansView.add(listView.get(i));
             }
         }
         return ansView;
+    }
+
+    public String[] viewArea(int vid){
+        HashMap area=dao.viewArea(vid);
+        String aa=(String) area.get("scope");
+        String[] areas=aa.split(",");
+//        for (int i=0;i<areas.length;i++)
+//            System.out.println(areas[i]);
+        return areas;
+    }
+
+    public HashMap recommand(int uid){
+        List<HashMap> hashMaps=new LinkedList<HashMap>();
+        hashMaps=dao.rankByCollect(0);
+        return hashMaps.get(0);
     }
 
 }

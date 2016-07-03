@@ -18,7 +18,7 @@ public interface AdwebService {
 
     public int login(String username,String password);
 
-    public String setPortrait(int uid,MultipartFile file);
+    public String setPortrait(int uid);
 
     public List<View> getActions(int uid,int aid);
 
@@ -40,16 +40,20 @@ public interface AdwebService {
 
     public boolean deleteAction(int uid,int vid,int aid);
 
-    public List<HashMap> getFlag(int ftype);
+    public List<HashMap> getFlag(int ftype,int vid);
 
     public boolean addFlag(int fid,int vid,double longitude,double latitude,String addition);
 
 
-    public String setPicture(MultipartFile file);
+    public String setPicture();
 
     public boolean addComment(int uid,int vid,int grade,String detail,String url,int type,String addition);
 
     public List<HashMap> rankOfNeighbour(int aid,double longitude,double latitude);
 
     public List<View> routeSchedule(String name_x,String name_y);
+
+    public String[] viewArea(int vid);
+
+    public HashMap recommand(int uid);
 }

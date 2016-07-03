@@ -37,10 +37,15 @@ public class ExcitedController {
         return Maps.newHashMap(ImmutableMap.of("uid", adwebService.login(username, password)));
     }
 
-    @RequestMapping(value = "/portrait/{uid}", headers = "content-type=multipart/*", method = RequestMethod.POST)
-    public HashMap upload(@PathVariable int uid,
-                          @RequestParam("fileData") MultipartFile fileData) {
-        return Maps.newHashMap(ImmutableMap.of("value", adwebService.setPortrait(uid, fileData)));
+//    @RequestMapping(value = "/portrait/{uid}", headers = "content-type=multipart/*", method = RequestMethod.POST)
+//    public HashMap upload(@PathVariable int uid,
+//                          @RequestParam("fileData") MultipartFile fileData) {
+//        return Maps.newHashMap(ImmutableMap.of("value", adwebService.setPortrait(uid, fileData)));
+//    }
+
+    @RequestMapping(value="/setPortrait/{uid}")
+    public HashMap setPortrait(@PathVariable int uid){
+        return Maps.newHashMap(ImmutableMap.of("value",adwebService.setPortrait(uid)));
     }
 
     @RequestMapping(value = "/action/show/{uid}/{aid}")
@@ -93,9 +98,9 @@ public class ExcitedController {
         return adwebService.deleteAction(uid, vid, aid);
     }
 
-    @RequestMapping(value="/flag/show/{ftype}")
-    public List<HashMap> getFlag(@PathVariable int ftype){
-        return adwebService.getFlag(ftype);
+    @RequestMapping(value="/flag/show/{ftype}/{vid}")
+    public List<HashMap> getFlag(@PathVariable int ftype,@PathVariable int vid){
+        return adwebService.getFlag(ftype,vid);
     }
 
     @RequestMapping(value="/flag/add/{fid}/{vid}/{longitude}/{latitude}/{addition}")
@@ -109,10 +114,15 @@ public class ExcitedController {
         return adwebService.rankOfNeighbour(aid, longitude, latitude);
     }
 
-    @RequestMapping(value = "/comment/picture", headers = "content-type=multipart/*", method = RequestMethod.POST)
-    public HashMap setPicture(
-                          @RequestParam("fileData") MultipartFile fileData) {
-        return Maps.newHashMap(ImmutableMap.of("url", adwebService.setPicture(fileData)));
+//    @RequestMapping(value = "/comment/picture", headers = "content-type=multipart/*", method = RequestMethod.POST)
+//    public HashMap setPicture(
+//                          @RequestParam("fileData") MultipartFile fileData) {
+//        return Maps.newHashMap(ImmutableMap.of("url", adwebService.setPicture(fileData)));
+//    }
+
+    @RequestMapping(value = "/comment/picture")
+    public HashMap setPicture() {
+        return Maps.newHashMap(ImmutableMap.of("value",adwebService.setPicture()));
     }
 
     @RequestMapping(value="/comment/add/{uid}/{vid}/{grade}/{detail}/{url}/{type}/{addition}")
@@ -126,5 +136,14 @@ public class ExcitedController {
         return adwebService.routeSchedule(name_x,name_y);
     }
 
+    @RequestMapping(value="/view/area/{vid}")
+    public String[] viewArea(@PathVariable int vid){
+        return adwebService.viewArea(vid);
+    }
+
+    @RequestMapping(value="recommand/{uid}")
+    public HashMap recommand(@PathVariable int uid){
+        return adwebService.recommand(uid);
+    }
 
 }

@@ -57,11 +57,11 @@ public interface Dao {
 
     public void deleteAction(HashMap hashMap);
 
-    public List<HashMap> getFlagTypeZero();
+    public List<HashMap> getFlagTypeZero(int vid);
 
-    public List<HashMap> getFlagTypeOne();
+    public List<HashMap> getFlagTypeOne(int vid);
 
-    public List<HashMap> getFlagTypeTwo();
+    public List<HashMap> getFlagTypeTwo(int vid);
 
     public void addFlag(Flag flag);
 
@@ -74,5 +74,7 @@ public interface Dao {
     public List<HashMap> rankOfNeighbourByWish();
 
     public List<HashMap> rankOfNeighbourByGrade();
+
+    public HashMap viewArea(int vid);
 
 }

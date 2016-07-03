@@ -140,8 +140,8 @@
     </select>
 
     <select id="getAllComments" resultType="java.util.HashMap" parameterType="java.lang.Integer">
-        select * from comment,resource
-        where comment.vid=#{vid} and comment.cid=resource.cid
+        select * from comment,user
+        where comment.vid=#{vid} and comment.uid=user.uid
     </select>
 
     <insert id="addAction" parameterType="java.util.HashMap">
@@ -155,17 +155,17 @@
 
     <select id="getFlagTypeZero" resultType="java.util.HashMap" >
         select * from flag
-        where (flag.fid BETWEEN 0 and 4)
+        where (flag.fid BETWEEN 0 and 4) and flag.vid=#{vid}
     </select>
 
     <select id="getFlagTypeOne" resultType="java.util.HashMap" >
         select * from flag
-        where (flag.fid BETWEEN 5 and 11)
+        where (flag.fid BETWEEN 5 and 9) and flag.vid=#{vid}
     </select>
 
     <select id="getFlagTypeTwo" resultType="java.util.HashMap">
         select * from flag
-        where  (flag.fid BETWEEN 12 and 17)
+        where  (flag.fid BETWEEN 10 and 14) and flag.vid=#{vid}
     </select>
 
     <insert id="addFlag" parameterType="adweb.model.Flag">
@@ -177,5 +177,10 @@
         insert into comment(vid,uid,grade,detail,url,type,addition)
         values(#{vid},#{uid},#{grade},#{detail},#{url},#{type},#{addition})
     </insert>
+
+    <select id="viewArea" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+        select * from view
+        where view.vid=#{vid}
+    </select>
 
 </mapper>
